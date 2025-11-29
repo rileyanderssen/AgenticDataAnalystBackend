@@ -31,7 +31,7 @@ async def visualize_data(
         requested_output_type,
         chart_type
     )
-
+    
     response = await orchestrator.coordinate()
     if response is not None:
         return { 

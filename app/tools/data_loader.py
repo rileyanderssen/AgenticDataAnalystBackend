@@ -46,7 +46,8 @@ class DataLoader:
         return FileData(
             file_type=file_type,
             headers=headers,
-            rows=rows
+            rows=rows,
+            dataframe=df
         )
 
 

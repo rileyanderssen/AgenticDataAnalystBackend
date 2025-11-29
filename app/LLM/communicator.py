@@ -11,7 +11,6 @@ class Communictor:
         self.prompt = prompt
     
     async def send_prompt(self):
-        # MOVE TO ENV FILE
         client = OpenAI(api_key=api_key)
 
         try:

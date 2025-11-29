@@ -7,11 +7,13 @@ class PythonAgent:
         self,
         headers: List[str],
         rows: List[Dict[str, Any]],
-        user_query: str
+        user_query: str,
+        chart_type: str
     ):
         self.headers = headers
         self.rows = rows
         self.user_query = user_query
+        self.chart_type = chart_type
 
     async def determine_query_answer(self) -> str:
         prompt_generator = PromptGenerator(self.headers, self.rows, self.user_query)
@@ -23,5 +25,20 @@ class PythonAgent:
 
         return answer
         
+    async def determine_chart_query_answer(self) -> str:
+        prompt_generator = PromptGenerator(self.headers, self.rows, self.user_query)
+
+        if self.chart_type == "Any":
+            chart_query_prompt = prompt_generator.generate_chart_any_query()    
+        else:
+            chart_query_prompt = prompt_generator.generate_chart_query()
+
+        communicator = Communictor(chart_query_prompt)
+
+        # TODO -> create a code validator tool, loop until valid response
+        answer = await communicator.send_prompt()
+
+        return answer
+
 
     

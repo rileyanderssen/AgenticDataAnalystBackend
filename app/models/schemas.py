@@ -5,6 +5,7 @@ class FileData(BaseModel):
     file_type: str
     headers: List[str]
     rows: List[Dict[str, Any]]
+    dataframe: Any = None
 
 class UserFileDataRequest(BaseModel):
     user_query: str = ""

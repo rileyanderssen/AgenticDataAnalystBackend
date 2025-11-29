@@ -2,6 +2,7 @@ from typing import Optional, Any
 from fastapi import UploadFile, File
 from app.tools.data_loader import DataLoader
 from app.agents.python_agent import PythonAgent
+from app.agents.visualization_agent import VisualizationAgent
 
 class Orchestrator:
     def __init__(
@@ -30,6 +31,16 @@ class Orchestrator:
             answer = await python_agent.determine_query_answer()
 
             return answer
+        else:
+            python_agent = PythonAgent(file_data.headers, file_data.rows, self.user_query, self.chart_type)
+
+            answer = await python_agent.determine_chart_query_answer()
+
+            visualization_agent = VisualizationAgent(file_data.dataframe, self.chart_type, answer)
+            chart_config = await visualization_agent.construct_chart()
+
+            return chart_config
+
 
 
     
