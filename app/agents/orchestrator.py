@@ -26,7 +26,7 @@ class Orchestrator:
         file_data = await self.data_loader.process_file(self.file)
 
         if self.requested_output_type == "general enquiry":
-            python_agent = PythonAgent(file_data.headers, file_data.rows, self.user_query)
+            python_agent = PythonAgent(file_data.headers, file_data.rows, self.user_query, self.chart_type)
 
             answer = await python_agent.determine_query_answer()
 

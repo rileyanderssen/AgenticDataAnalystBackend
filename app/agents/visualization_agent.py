@@ -40,9 +40,14 @@ class VisualizationAgent:
             }
         
         elif isinstance(result, pd.DataFrame):
+            if not isinstance(result.index, pd.RangeIndex):
+                result = result.reset_index()
+
             if len(result.columns) == 2:
+                labels = result.iloc[:, 0].astype(str).tolist()
+
                 return {
-                    'labels': result.iloc[:, 0].tolist(),
+                    'labels': labels,
                     'values': result.iloc[:, 1].tolist(),
                     'type': 'dataframe',
                     'columns': result.columns.tolist()

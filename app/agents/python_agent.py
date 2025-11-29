@@ -37,6 +37,8 @@ class PythonAgent:
 
         # TODO -> create a code validator tool, loop until valid response
         answer = await communicator.send_prompt()
+        print("== PRINTING ANSWER ===")
+        print(answer)
 
         return answer
 

@@ -25,6 +25,7 @@ async def visualize_data(
     requested_output_type: str = Form(""),
     chart_type: str = Form("")
 ):
+    print("ROUTE HIT")
     orchestrator = Orchestrator(
         file,
         user_query,
