@@ -11,6 +11,7 @@ class PromptGenerator:
         self.rows = rows
         self.user_query = user_query
     
+    # For multi-level queries making use of more than two columns, use group by with unstack().
     def generate_chart_query(self) -> str:
         header_data = self._format_header_data()
 
@@ -21,7 +22,7 @@ class PromptGenerator:
 
         The CSV/Excel schema provided for this query is: {header_data}
 
-        Return ONLY pandas aggregation code so that a graph can be made.
+        Return ONLY pandas aggregation code so that a graph can be made (do not include reset_index()).
         EXAMPLE OF EXPECTED RESPONSE: df.groupby('Product')['Sales'].sum()
         """
 
